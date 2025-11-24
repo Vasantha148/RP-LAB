@@ -1,0 +1,60 @@
+// Demonstrate common Rust error-handling techniques in small examples.
+
+fn demo_unwrap_or() {
+    // parse may fail; unwrap_or provides a default instead of panicking
+    let good = "123".parse::<i32>().unwrap_or(0);
+    let bad  = "abc".parse::<i32>().unwrap_or(0);
+    println!("unwrap_or -> good: {}, bad(default): {}", good, bad);
+}
+
+fn demo_match_result(s: &str) {
+    // explicit handling with match
+    match s.parse::<i32>() {
+        Ok(n) => println!("match -> parsed {}", n),
+        Err(e) => println!("match -> parse error: {}", e),
+    }
+}
+
+fn demo_question_operator(s: &str) -> Result<i32, std::num::ParseIntError> {
+    // use the `?` operator to propagate errors
+    let n: i32 = s.parse()?; // if parse fails, error is returned to caller
+    Ok(n * 2)
+}
+
+fn demo_map_err(s: &str) {
+    // transform the error type/message using map_err
+    let res: Result<i32, String> = s.parse::<i32>()
+        .map_err(|e| format!("custom parse error: {}", e));
+    match res {
+        Ok(n) => println!("map_err -> parsed: {}", n),
+        Err(msg) => println!("map_err -> {}", msg),
+    }
+}
+
+fn demo_panic() {
+    // This demonstrates panic!, but DO NOT call it in normal runs
+    // panic!("This is a forced panic (example)"); // uncomment to see a panic
+    println!("demo_panic: (panics are shown by uncommenting the panic! line)");
+}
+
+fn main() {
+    demo_unwrap_or();
+
+    demo_match_result("42");
+    demo_match_result("not_a_number");
+
+    // Using the function that returns Result and the `?` operator inside it:
+    match demo_question_operator("10") {
+        Ok(v) => println!("question_operator -> result: {}", v),
+        Err(e) => println!("question_operator -> error: {}", e),
+    }
+    match demo_question_operator("xyz") {
+        Ok(v) => println!("question_operator -> result: {}", v),
+        Err(e) => println!("question_operator -> error: {}", e),
+    }
+
+    demo_map_err("7");
+    demo_map_err("seven");
+
+    demo_panic();
+}
