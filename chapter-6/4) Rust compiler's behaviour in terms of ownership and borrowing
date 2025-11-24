@@ -1,14 +1,23 @@
-fn take_ownership(s: String) {
-    println!("I took: {}", s);
-} // s dropped here
+fn give_ownership() -> String {
+    String::from("owned")
+}
 
-fn borrow_string(s: &String) {
-    println!("I borrowed: {}", s);
-} // borrow ends here
+fn takes_and_returns(s: String) -> String {
+    s + " returned"
+}
 
 fn main() {
-    let s = String::from("hello");
-    borrow_string(&s);        // borrow, s still usable
-    take_ownership(s);        // move, s no longer usable after this
-    // println!("{}", s); // <-- compile error if uncommented
+    let a = give_ownership();            // a owns
+    let b = a;                           // move a -> b
+    // a cannot be used now
+    let c = takes_and_returns(b);        // b moved into function, returned value assigned to c
+    println!("{}", c);
+    // Borrowing example:
+    let s = String::from("borrow");
+    let len = calculate_len(&s);         // borrow, s still usable
+    println!("len = {}, s = {}", len, s);
+}
+
+fn calculate_len(s: &String) -> usize {
+    s.len()
 }
