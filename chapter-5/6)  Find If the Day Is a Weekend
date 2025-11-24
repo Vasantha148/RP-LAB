@@ -1,29 +1,27 @@
-#[derive(Debug)]
-struct Rectangle {
-    width: f64,
-    height: f64,
+#[allow(dead_code)]   // <-- this removes the warning
+enum Days {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday,
 }
 
-impl Rectangle {
-    // constructor
-    fn new(width: f64, height: f64) -> Self {
-        Self { width, height }
-    }
-
-    // area: returns width * height (treat negative values safely by using absolute)
-    fn area(&self) -> f64 {
-        (self.width.abs()) * (self.height.abs())
-    }
-
-    // perimeter: 2*(width + height) (use absolute to avoid negative perimeter)
-    fn perimeter(&self) -> f64 {
-        2.0 * (self.width.abs() + self.height.abs())
+impl Days {
+    fn is_weekend(&self) -> u8 {
+        match self {
+            Days::Saturday | Days::Sunday => 1,
+            _ => 0,
+        }
     }
 }
 
 fn main() {
-    let r = Rectangle::new(5.0, 3.0);
-    println!("Rectangle: {:?}", r);
-    println!("Area = {}", r.area());
-    println!("Perimeter = {}", r.perimeter());
+    let d1 = Days::Friday;
+    let d2 = Days::Sunday;
+
+    println!("Friday  => {}", d1.is_weekend());
+    println!("Sunday  => {}", d2.is_weekend());
 }
