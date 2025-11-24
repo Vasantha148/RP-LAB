@@ -1,0 +1,12 @@
+struct MathOps;
+
+impl MathOps {
+    fn square(n: i32) -> i32 {   // static-like method
+        n * n
+    }
+}
+
+fn main() {
+    let result = MathOps::square(6);
+    println!("Square = {}", result);
+}
