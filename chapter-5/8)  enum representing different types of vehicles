@@ -1,0 +1,19 @@
+enum Vehicle {
+    Car(String),
+    Bike(String),
+    Truck(u32), // weight in tons
+}
+
+fn print_vehicle(v: Vehicle) {
+    match v {
+        Vehicle::Car(model) => println!("Car Model: {}", model),
+        Vehicle::Bike(name) => println!("Bike Name: {}", name),
+        Vehicle::Truck(weight) => println!("Truck Weight: {} tons", weight),
+    }
+}
+
+fn main() {
+    print_vehicle(Vehicle::Car("Suzuki".to_string()));
+    print_vehicle(Vehicle::Bike("Royal Enfield".to_string()));
+    print_vehicle(Vehicle::Truck(12));
+}
