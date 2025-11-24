@@ -1,0 +1,24 @@
+use reqwest;
+use tokio;
+
+#[tokio::main]
+async fn main() {
+    // Make an async GET request
+    let url = "https://jsonplaceholder.typicode.com/posts/1";
+
+    match reqwest::get(url).await {
+        Ok(response) => {
+            match response.text().await {
+                Ok(body) => {
+                    println!("Response Body:\n{}", body);
+                }
+                Err(e) => {
+                    println!("Error reading response body: {}", e);
+                }
+            }
+        }
+        Err(e) => {
+            println!("Request Failed: {}", e);
+        }
+    }
+}
