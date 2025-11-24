@@ -1,0 +1,14 @@
+fn take_ownership(s: String) {
+    println!("I took: {}", s);
+} // s dropped here
+
+fn borrow_string(s: &String) {
+    println!("I borrowed: {}", s);
+} // borrow ends here
+
+fn main() {
+    let s = String::from("hello");
+    borrow_string(&s);        // borrow, s still usable
+    take_ownership(s);        // move, s no longer usable after this
+    // println!("{}", s); // <-- compile error if uncommented
+}
