@@ -1,0 +1,36 @@
+// Simple macro that prints a message
+macro_rules! say_hello {
+    () => {
+        println!("Hello from a custom macro!");
+    };
+}
+
+// Macro that prints a variable name and value
+macro_rules! show {
+    ($x:expr) => {
+        println!("{} = {}", stringify!($x), $x);
+    };
+}
+
+// Macro that generates a function
+macro_rules! make_add_fn {
+    ($name:ident, $value:expr) => {
+        fn $name(x: i32) -> i32 {
+            x + $value
+        }
+    };
+}
+
+// Generate functions
+make_add_fn!(add10, 10);
+make_add_fn!(add5, 5);
+
+fn main() {
+    say_hello!(); // FIXED
+
+    let a = 20;
+    show!(a);
+
+    println!("add10(5) = {}", add10(5));
+    println!("add5(5) = {}", add5(5));
+}
