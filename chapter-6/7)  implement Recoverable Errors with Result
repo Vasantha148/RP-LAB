@@ -1,0 +1,20 @@
+fn divide(a: i32, b: i32) -> Result<i32, String> {
+    if b == 0 {
+        return Err("Cannot divide by zero".to_string());
+    }
+    Ok(a / b)
+}
+
+fn main() {
+    // Case 1: Success
+    match divide(10, 2) {
+        Ok(value) => println!("10 / 2 = {}", value),
+        Err(err) => println!("Error: {}", err),
+    }
+
+    // Case 2: Recoverable Error
+    match divide(10, 0) {
+        Ok(value) => println!("10 / 0 = {}", value),
+        Err(err) => println!("Error: {}", err),
+    }
+}
