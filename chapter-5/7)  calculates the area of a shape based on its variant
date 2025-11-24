@@ -1,0 +1,19 @@
+enum Shape {
+    Circle(f64),           // radius
+    Square(f64),           // side
+    Triangle(f64, f64),    // base, height
+}
+
+fn area(shape: Shape) -> f64 {
+    match shape {
+        Shape::Circle(r) => 3.14159 * r * r,
+        Shape::Square(s) => s * s,
+        Shape::Triangle(b, h) => 0.5 * b * h,
+    }
+}
+
+fn main() {
+    println!("Circle Area: {}", area(Shape::Circle(5.0)));
+    println!("Square Area: {}", area(Shape::Square(4.0)));
+    println!("Triangle Area: {}", area(Shape::Triangle(6.0, 4.0)));
+}
