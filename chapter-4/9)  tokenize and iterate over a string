@@ -1,0 +1,7 @@
+fn main() {
+    let text = String::from("Rust is fast and safe");
+
+    for word in text.split_whitespace() {
+        println!("{}", word);
+    }
+}
