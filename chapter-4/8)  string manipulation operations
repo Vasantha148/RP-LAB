@@ -1,0 +1,21 @@
+fn main() {
+    let mut s = String::from("  hello rust programming  ");
+
+    // a. capacity() — works on String
+    println!("Capacity: {}", s.capacity());
+
+    // b. contains() — takes &str and returns bool
+    println!("Contains 'rust'? {}", s.contains("rust"));
+
+    // c. replace(from, to) — returns a new String (does not change `s` in-place)
+    let replaced = s.replace("rust", "RUST");
+    println!("After replace: {}", replaced);
+
+    // d. trim() — returns a &str slice (does not change `s`)
+    let trimmed = s.trim();
+    println!("Trimmed: '{}'", trimmed);
+
+    // If you want to update the original String with the replaced value:
+    s = replaced;
+    println!("Original `s` after assignment: '{}'", s);
+}
