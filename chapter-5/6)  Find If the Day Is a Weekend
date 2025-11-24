@@ -1,0 +1,29 @@
+#[derive(Debug)]
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+impl Rectangle {
+    // constructor
+    fn new(width: f64, height: f64) -> Self {
+        Self { width, height }
+    }
+
+    // area: returns width * height (treat negative values safely by using absolute)
+    fn area(&self) -> f64 {
+        (self.width.abs()) * (self.height.abs())
+    }
+
+    // perimeter: 2*(width + height) (use absolute to avoid negative perimeter)
+    fn perimeter(&self) -> f64 {
+        2.0 * (self.width.abs() + self.height.abs())
+    }
+}
+
+fn main() {
+    let r = Rectangle::new(5.0, 3.0);
+    println!("Rectangle: {:?}", r);
+    println!("Area = {}", r.area());
+    println!("Perimeter = {}", r.perimeter());
+}
