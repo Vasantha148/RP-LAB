@@ -1,0 +1,20 @@
+fn main() {
+    let mut num = 5;
+    let r1 = &num as *const i32;
+    let r2 = &mut num as *mut i32;
+
+    unsafe {
+        println!("r1 points to: {}", *r1);
+        *r2 = 10;
+        println!("r2 modified value to: {}", *r2);
+    }
+
+    // Example: allocate memory and deallocate manually (illustrative)
+    let boxed = Box::new(42);
+    let raw = Box::into_raw(boxed); // take ownership and get raw ptr
+    unsafe {
+        println!("raw value = {}", *raw);
+        // convert back and drop safely
+        let _ = Box::from_raw(raw);
+    }
+}
