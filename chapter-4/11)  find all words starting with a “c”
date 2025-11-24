@@ -1,0 +1,18 @@
+fn words_starting_with_c(input: &str) -> String {
+    let mut result = String::new();
+
+    for word in input.split_whitespace() {
+        if word.starts_with('c') || word.starts_with('C') {
+            result.push_str(word);
+        }
+    }
+
+    result
+}
+
+fn main() {
+    let text = "cat runs with cow and car in the city";
+    let output = words_starting_with_c(text);
+
+    println!("Concatenated words: {}", output);
+}
